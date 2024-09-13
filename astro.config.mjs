@@ -16,8 +16,7 @@ export default defineConfig({
     mode: "standalone",
   }),
   server: {
-    // @ts-ignore
-    port: parseInt(process.env.PORT) || 4321,
+    port: process.env.PORT ? parseInt(process.env.PORT) : 4321,
     host: true,
   },
 });
