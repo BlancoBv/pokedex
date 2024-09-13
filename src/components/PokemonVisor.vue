@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { onMounted, onUnmounted, provide, ref } from 'vue';
+import { onMounted, ref } from 'vue';
 import Card from './Card.vue';
 
 const props = defineProps<{ items: any[], nextUrl: string }>()

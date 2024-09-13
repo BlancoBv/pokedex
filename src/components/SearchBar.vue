@@ -9,13 +9,13 @@ const pending = ref<boolean>(false)
 
 watch(value, async () => {
     pending.value = true
-    const response = await fetch(`https://pokeapi.co/api/v2/pokemon/${value.value}`)
+    const response = await fetch(`https://pokeapi.co/api/v2/pokemon/${value.value.toLowerCase()}`)
         .then(res => {
             console.log(res, "ola");
 
             return res.json()
         })
-        .catch((err) => null)
+        .catch((_err) => null)
         .finally(() => pending.value = false)
 
     pokemon.value = response

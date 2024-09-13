@@ -15,8 +15,6 @@ const handleClick = (ev: MouseEvent, element: any) => {
     emit("changeActiveID", element.id)
     emit("setVisor", element)
 }
-const afterStyle = "after:content-['adasdsa'] after:text-error"
-
 </script>
 
 <template>
