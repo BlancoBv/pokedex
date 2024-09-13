@@ -1,5 +1,6 @@
 <script setup lang="ts">
-import { onMounted, ref, inject } from "vue"
+import { onMounted, ref } from "vue"
+import LazyImage from "./Lazy-image.vue";
 const props = defineProps<{ name: string; url: string, activeID: number }>()
 
 const emit = defineEmits(["setVisor", "changeActiveID"])
@@ -11,7 +12,7 @@ onMounted(async () => {
     pokemon.value = response
 })
 
-const handleClick = (ev: MouseEvent, element: any) => {
+const handleClick = (element: any) => {
     emit("changeActiveID", element.id)
     emit("setVisor", element)
 }
@@ -24,9 +25,10 @@ const handleClick = (ev: MouseEvent, element: any) => {
         :class="{
             'bg-orange-400 border-error border-8': props.activeID === pokemon.id,
             'bg-orange-200': props.activeID !== pokemon.id
-        }" @click="handleClick($event, pokemon)">
+        }" @click="handleClick(pokemon)">
         <figure class="w-20">
-            <img :src="pokemon.sprites.other.home.front_default" :alt="pokemon.name" class="object-cover">
+            <LazyImage :src="pokemon.sprites.other.home.front_default" :alt="pokemon.name || 'pokemon'" />
+            <!-- <img :src="pokemon.sprites.other.home.front_default" :alt="pokemon.name" class="object-cover"> -->
         </figure>
         <div class="card-body">
             <h2 class="card-title">
