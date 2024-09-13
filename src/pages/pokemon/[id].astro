@@ -1,0 +1,41 @@
+---
+import { Image } from "astro:assets";
+import Layout from "../../layouts/Layout.astro";
+
+const {id} = Astro.params
+
+const pokemon: {name:string, sprites:any, height:number, weight:number, types: {slot: number, type: {name:string, url:string}}[]} = await fetch(`https://pokeapi.co/api/v2/pokemon/${id}`).then(res=> res.json()).catch(()=> null)
+
+
+const specie :{genera: {genus:string, language: {name: string, url:string}}[]}= await fetch(`https://pokeapi.co/api/v2/pokemon-species/${id}`).then(res=>res.json()).catch(()=>null)
+
+const specieIndex = specie? specie.genera.findIndex(el=> el.language.name==="en") : null
+const specieText = specieIndex && specieIndex>=0 ? specie.genera?.[specieIndex]: {genus:"", language:{ name:"", url:""}}
+console.log(pokemon);
+
+if(!pokemon){
+    return Astro.redirect("/404")
+}
+---
+<Layout title="Pokemon">
+    <div class="flex">
+        <Image src={pokemon.sprites.other.home.front_default} alt={pokemon.name} inferSize class="size-60"/>
+        <div>
+            <div class="bg-orange-400 card p-4">
+                <h2>No. {id} {pokemon.name} </h2>
+                <span>{specieText.genus}</span>
+                <div>
+                    {pokemon.types.map(el=> <span class="badge badge-outline">{el.type.name}</span>)}
+                    {}
+                </div>
+            </div>
+            <div>
+                <span>Heigth {pokemon.height} m</span>
+                <div class="divider"/>
+                <span>Weight {pokemon.height} kgF</span>
+            </div>
+        </div>
+        
+    
+    </div>
+</Layout>
