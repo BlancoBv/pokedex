@@ -15,4 +15,8 @@ export default defineConfig({
   adapter: node({
     mode: "standalone",
   }),
+  server: {
+    port: process.env.PORT ? parseInt(process.env.PORT) : 4321,
+    host: true,
+  },
 });
