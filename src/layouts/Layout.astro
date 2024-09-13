@@ -1,8 +1,6 @@
 ---
 import SearchBar from "../components/SearchBar.vue"
-import Header from '../components/Header.vue';
-import Prueba from "../components/Prueba.vue";
-import { ViewTransitions } from "astro:transitions";
+
 interface Props {
 	title: string;
 }
@@ -21,7 +19,7 @@ const { title } = Astro.props;
 		<link href="https://fonts.cdnfonts.com/css/pf-tempesta-five" rel="stylesheet">
 		<meta name="generator" content={Astro.generator} />
 		<title>{title}</title>
-		<ViewTransitions />
+		
 	</head>
 	<body class="w-screen h-screen flex flex-col bg-gradient-to-b from-blue-500 to-purple-400">
 	<header class="z-50 navbar h-16">
