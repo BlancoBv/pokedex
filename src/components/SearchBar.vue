@@ -24,7 +24,7 @@ watch(value, async () => {
 
 <template>
 
-    <div class="dropdown">
+    <div class="dropdown w-60">
 
         <input tabindex="0" type="text" v-model="value" class="input input-bordered w-full max-w-xs"
             placeholder="Filter by ID or name!">
