@@ -21,7 +21,7 @@ const handleClick = (element: any) => {
 
 <template>
     <div v-if="Object.values(pokemon).length === 0"
-        class="card card-side h-28 cursor-pointer mb-4 rounded-e-none rounded-full transition-all ease-in-out duration-300 shadow-lg snap-end lg:snap-center skeleton">
+        class="card card-side h-28 cursor-pointer mb-4 transition-all ease-in-out duration-300 shadow-lg snap-end lg:snap-center skeleton">
     </div>
     <div v-else
         class="card card-side h-28 cursor-pointer mb-4 transition-all ease-in-out duration-300 shadow-lg snap-end lg:snap-start"
