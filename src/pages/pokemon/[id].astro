@@ -16,7 +16,7 @@ if(!pokemon){
     return Astro.redirect("/404")
 }
 ---
-<Layout title="Pokemon">
+<Layout title={`Pokemon ${pokemon.name}.`}>
     <div class="flex">
         <Image src={pokemon.sprites.other.home.front_default} alt={pokemon.name} inferSize class="size-60"/>
         <div>

@@ -42,20 +42,25 @@ async function handleScroll(ev: Event) {
 onMounted(async () => {
     pokemon.value = await fetchData(props.items[0].url)
 })
-console.log(pokemon);
-
 </script>
 
 <template>
     <div class="flex w-full flex-grow gap-4 flex-col sm:flex-row relative overflow-y-auto snap-y snap-mandatory"
         @scroll="handleScroll">
-        <div v-if="Object.values(pokemon).length === 0">Cargando...</div>
+        <div v-if="Object.values(pokemon).length === 0"
+            class="w-full h-full sticky top-0 sm:w-1/2 flex justify-center items-center p-4 z-40">
+            <div class="skeleton h-96 w-full m-2 p-4 card backdrop-blur-sm shadow-sm"></div>
+        </div>
+
         <VisorCard v-else :img-src="pokemon.sprites.other.home.front_default" :name="pokemon?.name" :id="pokemon.id"
             :types="pokemon.types" />
 
-        <div class="w-full sm:w-1/2 p-4">
+        <div class="w-full sm:w-1/2 p-4 pt-0">
             <Card :name="item.name" :url="item.url" v-for="item in pokemons" @setVisor="setVisor"
                 :activeID="activeCardID" @changeActiveID="changeActiveID" />
+            <div
+                class="bg-gradient-to-b from-transparent  to-purple-100 pointer-events-none sticky bottom-0 flex h-20 lg:h-12 ">
+            </div>
         </div>
 
     </div>

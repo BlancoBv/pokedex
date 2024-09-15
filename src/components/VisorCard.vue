@@ -4,9 +4,9 @@ import LazyImage from './Lazy-image.vue';
 defineProps<{ imgSrc: string; name: string | undefined; id: number | undefined; types: { slot: number; type: { name: string; url: string } }[] | undefined }>()
 </script>
 <template>
-    <div class="w-full h-full sticky top-0 sm:w-1/2 flex justify-center items-center p-4 z-40 backdrop-blur-sm">
+    <div class="w-full h-full sticky top-0 sm:w-1/2 flex justify-center items-center p-4 z-40">
         <div
-            class="border-4 border-blue-300 h-96 w-full m-2 p-2 card outline outline-yellow-300 outline-8 bg-gradient-to-b from-blue-100 to-transparent">
+            class="border-4 border-blue-300 lg:h-96 w-full p-4 card outline outline-yellow-300 outline-8 bg-gradient-to-b from-blue-100 to-transparent backdrop-blur-sm">
 
             <figure class=" size-40 lg:size-52 mx-auto">
                 <LazyImage :src="imgSrc" alt="pokemon" />

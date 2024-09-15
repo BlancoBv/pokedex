@@ -8,7 +8,7 @@ interface response {count: number; next: string; previus:string | null; results:
 const pokemons: response = await fetch("https://pokeapi.co/api/v2/pokemon").then(res => res.json()).catch(() => null)
 ---
 
-<Layout title="Welcome to Astro.">
+<Layout title="Pokedex.">
 	<PokemonVisor client:load items={pokemons.results} nextUrl={pokemons.next}>
 </Layout>
 
