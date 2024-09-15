@@ -28,11 +28,10 @@ const { title } = Astro.props;
 			<div class="flex-1">
 			  <a class="btn btn-ghost text-xl" href="/">Pokedex</a>
 			</div>
-			<div class="flex-none gap-2" transition:persist>
+			<div class="flex" transition:persist>
 				<SearchBar client:load/>
 			</div>
 		</header>
-
 		<slot />		
 	</body>
 </html>
