@@ -1,11 +1,23 @@
 ---
+import type { GetStaticPaths } from "astro";
 import format from "../../assets/format"
 import Layout from "../../layouts/Layout.astro";
 import RadarChart from "../../components/RadarChart.vue";
 import type { ChartData } from "chart.js";
 import LazyImage from "../../components/Lazy-image.vue";
 
+export const getStaticPaths = (async() => {
+    const data: {results:{url:string}[]}  = await fetch ("https://pokeapi.co/api/v2/pokemon/?offset=0&limit=1302").then(res=> res.json());
+    
+    return data.results.map(el=> {
+        const regExp= /pokemon\/(\d+)\//;
+        const match = el.url.match(regExp);
+
+        return({params:{id: match && match[1] ? match[1]:""}})});
+}) satisfies GetStaticPaths;
+
 const {id} = Astro.params
+
 
 const pokemon: {stats: {base_stat:number, effort:number, stat: {name:string, url: string}}[],name:string, sprites:any, height:number, weight:number, types: {slot: number, type: {name:string, url:string}}[]} = await fetch(`https://pokeapi.co/api/v2/pokemon/${id}`).then(res=> res.json()).catch(()=> null)
 
@@ -17,10 +29,6 @@ const specieText = specieIndex && specieIndex>=0 ? specie.genera?.[specieIndex]:
 
 const flavorText = specie? specie.flavor_text_entries.filter(el=> el.language.name==="en"):null
 
-
-if(!pokemon){
-    return Astro.redirect("/404")
-}
 
 const chartData:ChartData<"radar">  = {labels: [], datasets: [{label: "Stats", data:[], fill:true, backgroundColor:"rgba(251,146,60,0.6)"}]}
 
@@ -58,7 +66,5 @@ pokemon.stats.forEach(stat=> {
             <h2 class="text-2xl w-full text-start">Stats</h2>
             <RadarChart data={chartData} client:visible/>
         </div>
-        
-    
     </div>
 </Layout>
